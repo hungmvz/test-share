@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useCallback } from 'react';
 import './App.css';
+import image from './bye.jpg';
+import bg from './bg.jpg';
+import test from './mv_cryptogfm.png';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const title = 'this is share title';
+    const text = 'this is share text';
+    const onShareClick = useCallback(() => {
+        navigator.share({
+            title,
+        })
+    }, []);
+
+    const onShareMailClick = useCallback(() => {
+        window.open("mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(text), '_blank');
+    }, []);
+
+    return (
+        <div className='bg'>
+            <div className='container'>
+                <div className='main-container' style={{
+                    height: window.innerHeight,
+                }}>
+                    <img src={image} className="w-100" style={{
+                        objectFit: 'contain',
+                        maxHeight: '90vh'
+                    }} />
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;
